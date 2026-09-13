@@ -1,62 +1,50 @@
-# Comment Moderation NLP Ensemble
+# Comment moderation — representation and ensemble experiments
 
-![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-NLP-F7931E?logo=scikit-learn&logoColor=white)
-![LightGBM](https://img.shields.io/badge/LightGBM-Gradient_Boosting-02569B)
-![XGBoost](https://img.shields.io/badge/XGBoost-Ensemble-FF6600)
-![CatBoost](https://img.shields.io/badge/CatBoost-Ensemble-FFCC00)
-![Sentence Transformers](https://img.shields.io/badge/Sentence_Transformers-Embeddings-F59E0B)
+Four-class NLP classification with imbalanced labels, structured metadata, TF-IDF/SVD, sentence embeddings, gradient boosting, and a linear text model.
 
-NLP classification pipeline for an imbalanced comment-moderation challenge. The solution combines structured feature engineering, TF-IDF/SVD representations, sentence-transformer embeddings, gradient boosting models, and per-class threshold optimization to improve macro F1.
+[Recorded V4 notebook](23f1001015-notebook-v4.ipynb) · [V4 script](v4_solution.py) · [V5 experiment](v5_solution.py) · [Problem statement](PROBLEM_STATEMENT.md)
 
-## What This Demonstrates
+## Recorded results, with limits
 
-- Feature engineering from text, metadata, engagement, identity signals, and platform flags
-- Dual text representation: sparse TF-IDF/SVD plus dense sentence embeddings
-- Multi-model ensemble using LightGBM, XGBoost, CatBoost, and logistic regression
-- Class-imbalance handling for rare labels
-- Per-class threshold tuning for macro-F1 optimization
-- Kaggle-style experimental workflow with reproducible notebooks/scripts
+The table transcribes saved outputs from the [V4 notebook at commit 3ee35e8](https://github.com/jbanmol/comment-moderation-nlp-ensemble/blob/3ee35e85d2743532da3927989b3c73cdc1f4bfbe/23f1001015-notebook-v4.ipynb), evaluated over **198,000 labeled rows**. These are recorded exploratory out-of-fold (OOF) scores, not a new reproduction or an independent test benchmark.
 
-## Problem
+| Model / selection stage | Recorded macro-F1 |
+|---|---:|
+| Logistic regression (text) | 0.60453 |
+| CatBoost | 0.77132 |
+| LightGBM | 0.79170 |
+| XGBoost | 0.79945 |
+| Selected weighted ensemble | 0.80659 |
+| Ensemble + selected class-score offsets | 0.80701 |
 
-The task is to predict one of four moderation categories for user-generated comments. The main difficulty is class imbalance: one minority class is rare and semantically close to a more common hostile/inflammatory class.
+![Recorded exploratory V4 macro-F1; preprocessing precedes CV and ensemble selection reuses OOF labels.](https://raw.githubusercontent.com/jbanmol/jbanmol/main/assets/moderation-results.svg)
+
+**Interpretation matters:** TF-IDF, SVD, and scaling are fitted before the five-fold cross-validation loop. Ensemble weights and class-score offsets are selected against the same OOF labels used to report their scores. This introduces validation information into preprocessing and selection, so the results are not an unbiased estimate of generalization. The class-score adjustment adds offsets before argmax; it is not calibrated probability estimation.
+
+The notebook also prints a historical V3 leaderboard number, but no official leaderboard record was verified for this README. No public-test result is claimed here.
 
 ## Approach
 
-```text
-Raw comments and metadata
-  -> exploratory analysis
-  -> engineered structured features
-  -> TF-IDF + TruncatedSVD
-  -> sentence-transformer embeddings
-  -> gradient boosting and linear text models
-  -> weighted ensemble
-  -> per-class threshold optimization
+```mermaid
+flowchart LR
+    A[Comments and metadata] --> B[Structured features]
+    A --> C[TF-IDF and SVD]
+    A --> D[Sentence embeddings]
+    B --> E[Tree and linear models]
+    C --> E
+    D --> E
+    E --> F[OOF predictions]
+    F --> G[Select blend and score offsets]
 ```
 
-## Results Snapshot
+The saved notebook includes per-class precision/recall/F1 and a confusion matrix. Inspect minority-class behavior rather than using overall accuracy as the sole criterion.
 
-| Model / Stage | OOF Macro F1 |
-|---|---:|
-| Logistic regression text baseline | ~0.55 |
-| Tree models with structured + text features | ~0.64-0.65 |
-| Weighted ensemble | ~0.66+ |
-| Ensemble + threshold optimization | ~0.67+ |
+## Reproduction status
 
-## Repository Structure
+The scripts expect competition files under `/kaggle/input/comment-category-prediction-challenge/`: `train.csv`, `test.csv`, and `Sample.csv`. Dataset access and an exact tested dependency environment are not bundled. Optional XGBoost, CatBoost, and sentence-transformer imports can change which models participate.
 
-| Path | Purpose |
-|---|---|
-| `23f1001015-notebook-v4.ipynb` | Main solution notebook |
-| `v4_solution.py` | Python script version of the solution |
-| `PROBLEM_STATEMENT.md` | Competition description and EDA findings |
-| `README.md` | Portfolio overview |
+Use the V4 notebook to inspect the recorded run. To reproduce training, obtain permitted dataset access, preserve package/model versions, and record which optional components are enabled. The saved outputs alone do not prove that a fresh environment reproduces the result.
 
-## Tech Stack
+## Next evaluation requirements
 
-Python, pandas, NumPy, scikit-learn, LightGBM, XGBoost, CatBoost, sentence-transformers, TF-IDF, TruncatedSVD.
-
-## Key Lesson
-
-The biggest gains came from combining domain-specific EDA with representation diversity: structured signals solved some classes, while semantic embeddings helped distinguish the ambiguous minority class.
+Fit learned preprocessing inside each training fold; separate ensemble/offset selection from final evaluation; assess grouping by repeated posts/authors and possible train-test shift; and publish fold assignments, out-of-fold predictions, environment versions, and an untouched test result. Keep V4 and V5 results separately identified.
