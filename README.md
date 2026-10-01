@@ -4,6 +4,12 @@ Four-class NLP classification with imbalanced labels, structured metadata, TF-ID
 
 [Recorded V4 notebook](23f1001015-notebook-v4.ipynb) · [V4 script](v4_solution.py) · [V5 experiment](v5_solution.py) · [Problem statement](PROBLEM_STATEMENT.md)
 
+## Supported evaluation and case study
+
+Use [evaluate.py](evaluate.py) for the new leakage-safe text baseline. Read [the protocol and reproduction commands](EVALUATION.md) and [the client-facing case study](CASE_STUDY.md). Six regression tests pass. The committed synthetic run verifies execution only; **a corrected real-data benchmark is blocked by unavailable competition data**. No remote publication or deployment has been performed.
+
+V4/V5 are retained historical experiments. Direct script execution is disabled to prevent reuse of their known-leaky evaluation. Notebook outputs are preserved for inspection.
+
 ## Recorded results, with limits
 
 The table transcribes saved outputs from the [V4 notebook at commit 3ee35e8](https://github.com/jbanmol/comment-moderation-nlp-ensemble/blob/3ee35e85d2743532da3927989b3c73cdc1f4bfbe/23f1001015-notebook-v4.ipynb), evaluated over **198,000 labeled rows**. These are recorded exploratory out-of-fold (OOF) scores, not a new reproduction or an independent test benchmark.
@@ -19,7 +25,7 @@ The table transcribes saved outputs from the [V4 notebook at commit 3ee35e8](htt
 
 ![Recorded exploratory V4 macro-F1; preprocessing precedes CV and ensemble selection reuses OOF labels.](https://raw.githubusercontent.com/jbanmol/jbanmol/main/assets/moderation-results.svg)
 
-**Interpretation matters:** TF-IDF, SVD, and scaling are fitted before the five-fold cross-validation loop. Ensemble weights and class-score offsets are selected against the same OOF labels used to report their scores. This introduces validation information into preprocessing and selection, so the results are not an unbiased estimate of generalization. The class-score adjustment adds offsets before argmax; it is not calibrated probability estimation.
+**Interpretation matters:** Post-ID target encoding uses full-dataset labels before cross-validation, directly leaking validation targets. V5 shares this defect. TF-IDF, SVD, and scaling are fitted before the five-fold cross-validation loop. Ensemble weights and class-score offsets are selected against the same OOF labels used to report their scores. This introduces validation information into preprocessing and selection, so the results are not an unbiased estimate of generalization. The class-score adjustment adds offsets before argmax; it is not calibrated probability estimation.
 
 The notebook also prints a historical V3 leaderboard number, but no official leaderboard record was verified for this README. No public-test result is claimed here.
 
@@ -43,7 +49,7 @@ The saved notebook includes per-class precision/recall/F1 and a confusion matrix
 
 The scripts expect competition files under `/kaggle/input/comment-category-prediction-challenge/`: `train.csv`, `test.csv`, and `Sample.csv`. Dataset access and an exact tested dependency environment are not bundled. Optional XGBoost, CatBoost, and sentence-transformer imports can change which models participate.
 
-Use the V4 notebook to inspect the recorded run. To reproduce training, obtain permitted dataset access, preserve package/model versions, and record which optional components are enabled. The saved outputs alone do not prove that a fresh environment reproduces the result.
+Use the V4 notebook to inspect the recorded run. For supported new training, obtain permitted dataset access and follow EVALUATION.md. The saved historical outputs do not prove that a fresh environment reproduces the result.
 
 ## Next evaluation requirements
 

@@ -1,0 +1,11 @@
+# Auditing a comment-classification benchmark
+
+A public four-class comment classification experiment reported a selected ensemble macro-F1 of 0.80701. Reviewing the executable source revealed that each cross-validation row's label contributed to its own post-level target encoding. Learned preprocessing also ran before cross-validation, and ensemble choices reused evaluation labels. The historical number therefore cannot support a client-facing generalization claim.
+
+The fix establishes a smaller benchmark whose evaluation can be inspected: TF-IDF plus class-balanced logistic regression, preprocessing fitted within folds, independent validation for regularization selection, and a final test split excluded from training and selection. Posts and normalized duplicate comments stay together. Target encoding and undocumented internal metadata are excluded. Dataset checksums, splits, predictions, dependency versions and fitted models make later results traceable. The historical scripts now direct users to the supported evaluator.
+
+**Verified evidence:** six regression tests pass. The committed synthetic fixture reproduces a test macro-F1 of **0.25924** on **80 synthetic rows** (400 total). This verifies execution and isolation, not moderation accuracy. The competition data is absent; **no corrected real-data performance result is available**. The historical ensemble score remains an exploratory, leaked result; no improvement or score reduction on real data is claimed.
+
+A focused evaluation pilot could apply this workflow to a client's authorized dataset: agree on a decision metric and leakage threats, freeze the evaluation split, reproduce a simple baseline, inspect per-class errors, and deliver an evidence-backed comparison and reproducible report. This repository demonstrates the audit and implementation; a paid pilot, client outreach or production deployment has not occurred.
+
+Remaining limitations include unknown annotation reliability, near duplicates, unavailable author grouping, distribution drift and minority-class uncertainty. Group-based performance answers an unseen-post question; deployment requirements may need a chronological or separately collected test set. See [the exact protocol and commands](EVALUATION.md) and [synthetic evidence](evidence/synthetic/metrics.json).

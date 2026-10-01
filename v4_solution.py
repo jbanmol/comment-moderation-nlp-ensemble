@@ -1,3 +1,8 @@
+# Historical experiment retained for inspection; known validation leakage.
+# Use evaluate.py for the supported leakage-safe evaluation.
+if __name__ == "__main__":
+    raise SystemExit("Historical evaluation is disabled: use evaluate.py; see EVALUATION.md")
+
 # %% [markdown]
 # # Comment Category Prediction — v4 (Improved)
 # 
