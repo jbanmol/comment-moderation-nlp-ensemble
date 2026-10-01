@@ -40,18 +40,20 @@ Your goal is to use this information to predict how each entry was ultimately ca
 | `disability` | Whether the system detected references to an ability-related topic |
 | `label` | **Target Variable** — The final category assigned to the comment (4 distinct values) |
 
-## Key EDA Findings (from v3 Notebook)
+The official Kaggle data description we inspected describes four internal handling categories; it did not establish a semantic mapping for label IDs. Previous semantic interpretations are unverified and have been removed. See [authenticated source findings](remote/README.md).
 
-| Label | Meaning | `if_2` (median) | `if_1==0` rate |
-|---|---|---|---|
-| 0 | Normal comment | **4** | 79.3% |
-| 1 | Hate speech (racial/gender bias) | **10** | 17.0% |
-| 2 | Hostile/inflammatory | **10** | 76.6% |
-| 3 | Borderline political | **10** | 79.6% |
+## Historical EDA notes (not independently reproduced)
+
+| Label | `if_2` (median) | `if_1==0` rate |
+|---|---|---|
+| 0 | **4** | 79.3% |
+| 1 | **10** | 17.0% |
+| 2 | **10** | 76.6% |
+| 3 | **10** | 79.6% |
 
 - `if_2==4` is a strong indicator for Label 0
 - `if_2==10` separates Labels 1/2/3 from Label 0
-- Label 1 (hate speech): 20.3% black + 25.3% white race mentions vs ~4% for Label 0
+- Label 1: 20.3% black + 25.3% white race mentions vs ~4% for Label 0
 - `if_1 > 0` is found in 83% of Label 1 samples
 
 ## Baseline Performance

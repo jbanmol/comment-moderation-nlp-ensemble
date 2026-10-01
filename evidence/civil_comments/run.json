@@ -1,0 +1,32 @@
+{
+  "notebook_url": "https://www.kaggle.com/code/jbanmol9/civil-comments-private-baseline",
+  "version": 1,
+  "protocol_commit": "005bf4d",
+  "status": "KernelWorkerStatus.COMPLETE",
+  "source_sha256": "20fd4edfc008ded7d80fe624151c925627bf5ab12cb8a1d5f7281d084b49f213",
+  "aggregate_only": true,
+  "dataset_downloaded_to_mac": false,
+  "stages": [
+    {
+      "seconds": 4.703613204,
+      "stage": "STAGE=train_loading"
+    },
+    {
+      "seconds": 65.230762744,
+      "stage": "STAGE=validation_loading"
+    },
+    {
+      "seconds": 68.813963219,
+      "stage": "STAGE=training_and_validation_selection"
+    },
+    {
+      "seconds": 112.872065713,
+      "stage": "STAGE=test_loading_after_selection"
+    },
+    {
+      "seconds": 117.072737317,
+      "stage": "STAGE=final_test"
+    }
+  ],
+  "metadata_verification": "GetKernel HTTP403; private CPU configuration is based on uploaded request, not independently read server metadata"
+}

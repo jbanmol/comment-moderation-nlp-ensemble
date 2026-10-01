@@ -1,0 +1,17 @@
+{
+  "id": "jbanmol9/civil-comments-private-baseline",
+  "title": "Civil Comments Private Baseline",
+  "code_file": "benchmark.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "competition_sources": [],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "model_sources": [],
+  "evidence_basis": "Uploaded request metadata; independent GetKernel metadata read returned HTTP403",
+  "runtime_image_status": "Unavailable; no retry or access bypass attempted"
+}
