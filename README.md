@@ -6,9 +6,9 @@ Four-class NLP classification with imbalanced labels, structured metadata, TF-ID
 
 ## Supported evaluation and case study
 
-Use [evaluate.py](evaluate.py) for the new leakage-safe text baseline. Read [the protocol and reproduction commands](EVALUATION.md) and [the client-facing case study](CASE_STUDY.md). Six regression tests pass. The committed synthetic run verifies execution only; **a corrected real-data benchmark is blocked by unavailable competition data**. No remote publication or deployment has been performed.
+Use [evaluate.py](evaluate.py) for the new leakage-safe text baseline. Read [the protocol and reproduction commands](EVALUATION.md) and [the client-facing case study](CASE_STUDY.md). Eight regression tests pass in a freshly installed isolated environment. The committed synthetic run verifies execution only; **a corrected real-data benchmark is blocked by unavailable competition data**. No remote publication or deployment has been performed.
 
-V4/V5 are retained historical experiments. Direct script execution is disabled to prevent reuse of their known-leaky evaluation. Notebook outputs are preserved for inspection.
+V4/V5 are retained historical experiments. Historical scripts warn and require an explicit archival opt-in before running their known-leaky evaluation. Notebook outputs are preserved for inspection.
 
 ## Recorded results, with limits
 

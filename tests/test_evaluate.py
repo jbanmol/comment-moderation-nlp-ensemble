@@ -2,7 +2,9 @@ import tempfile
 import unittest
 from pathlib import Path
 
+import joblib
 import numpy as np
+from sklearn.model_selection import StratifiedGroupKFold
 import pandas as pd
 
 from evaluate import evaluate, leakage_groups, make_model, split_indices, validate_data
@@ -73,10 +75,36 @@ class EvaluationTests(unittest.TestCase):
             pb = pd.read_csv(Path(tmp) / 'b' / 'test_predictions.csv')
             np.testing.assert_array_equal(pa.prediction, pb.prediction)
 
+    def test_cv_folds_preserve_groups(self):
+        df = fixture()
+        groups = leakage_groups(df)
+        train, _, _ = split_indices(groups)
+        for a, b in StratifiedGroupKFold(n_splits=3, shuffle=True, random_state=42).split(
+                df.comment.iloc[train], df.label.iloc[train], groups[train]):
+            self.assertFalse(set(groups[train[a]]) & set(groups[train[b]]))
+
+    def test_final_refit_excludes_test_vocabulary(self):
+        df = fixture()
+        _, _, test = split_indices(leakage_groups(df))
+        df.loc[test, 'comment'] += ' secrettestpartitiontoken'
+        with tempfile.TemporaryDirectory() as tmp:
+            evaluate(df, Path(tmp) / 'run', 'fixture', 'synthetic')
+            model = joblib.load(Path(tmp) / 'run' / 'model.joblib')
+            self.assertNotIn('secrettestpartitiontoken', model.named_steps['tfidf'].vocabulary_)
+
     def test_invalid_data_fails(self):
         with self.assertRaises(ValueError):
             validate_data(pd.DataFrame({'comment': ['x']}))
         df = fixture()
+        float_labels = df.copy()
+        float_labels['label'] = float_labels.label.astype(float)
+        with self.assertRaises(ValueError):
+            validate_data(float_labels)
+        blank_post = df.copy()
+        blank_post['post_id'] = blank_post.post_id.astype(str)
+        blank_post.loc[0, 'post_id'] = ' '
+        with self.assertRaises(ValueError):
+            validate_data(blank_post)
         df.loc[0, 'comment'] = None
         with self.assertRaises(ValueError):
             validate_data(df)

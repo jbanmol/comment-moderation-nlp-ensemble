@@ -25,8 +25,10 @@ def validate_data(df):
         raise ValueError(f'Required columns: {sorted(required)}')
     if df[list(required)].isna().any().any():
         raise ValueError('Missing comment, post_id or label; resolve explicitly before evaluation')
-    if set(df.label.unique()) != {0, 1, 2, 3}:
+    if not pd.api.types.is_integer_dtype(df.label.dtype) or set(df.label.unique()) != {0, 1, 2, 3}:
         raise ValueError('Expected integer labels 0, 1, 2, 3')
+    if df.post_id.astype(str).str.strip().eq('').any():
+        raise ValueError('Empty post IDs are not supported')
     if df.comment.astype(str).str.strip().eq('').any():
         raise ValueError('Empty comments are not supported')
 

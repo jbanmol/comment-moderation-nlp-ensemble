@@ -1,7 +1,13 @@
 # Historical experiment retained for inspection; known validation leakage.
 # Use evaluate.py for the supported leakage-safe evaluation.
 if __name__ == "__main__":
-    raise SystemExit("Historical evaluation is disabled: use evaluate.py; see EVALUATION.md")
+    import os as _historical_os
+    import warnings as _historical_warnings
+    if _historical_os.environ.get("ALLOW_LEAKY_HISTORICAL_RUN") != "1":
+        raise SystemExit("Known-leaky historical run: use evaluate.py. For archival reproduction only, "
+                         "set ALLOW_LEAKY_HISTORICAL_RUN=1; see EVALUATION.md")
+    _historical_warnings.warn("Historical evaluation leaks validation information. "
+                              "Its scores are not independent test performance.", RuntimeWarning)
 
 # %% [markdown]
 # # Comment Category Prediction — v5 (Pushing Past 0.90)
