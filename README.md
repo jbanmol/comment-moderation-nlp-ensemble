@@ -6,7 +6,7 @@ Four-class NLP classification with imbalanced labels, structured metadata, TF-ID
 
 ## Supported evaluation and case study
 
-Use [evaluate.py](evaluate.py) for the new leakage-safe text baseline. Read [the protocol and reproduction commands](EVALUATION.md) and [the client-facing case study](CASE_STUDY.md). Eight regression tests pass in a freshly installed isolated environment. The committed synthetic run verifies execution only; **a corrected real-data benchmark is blocked by unavailable competition data**. No remote publication or deployment has been performed.
+Use [evaluate.py](evaluate.py) for the new leakage-safe text baseline. Read [the protocol and reproduction commands](EVALUATION.md) and [the client-facing case study](CASE_STUDY.md). Nine regression tests pass in a freshly installed isolated environment. The committed synthetic run verifies execution only; **a corrected real-data benchmark awaits clarification of competition rules for AI-assisted remote evaluation; data must stay on Kaggle**. No remote publication or deployment has been performed.
 
 V4/V5 are retained historical experiments. Historical scripts warn and require an explicit archival opt-in before running their known-leaky evaluation. Notebook outputs are preserved for inspection.
 
@@ -54,3 +54,5 @@ Use the V4 notebook to inspect the recorded run. For supported new training, obt
 ## Next evaluation requirements
 
 Fit learned preprocessing inside each training fold; separate ensemble/offset selection from final evaluation; assess grouping by repeated posts/authors and possible train-test shift; and publish fold assignments, out-of-fold predictions, environment versions, and an untouched test result. Keep V4 and V5 results separately identified.
+
+Authenticated Kaggle access and aggregate-only remote preparation are documented in [remote/README.md](remote/README.md). Nothing has been uploaded or run remotely.

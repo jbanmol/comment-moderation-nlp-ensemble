@@ -54,3 +54,12 @@ Initial fix (15 files):
 Verification follow-up updates eight existing files: `evaluate.py` (strict integer labels/blank-post validation), `tests/test_evaluate.py` (two additional isolation tests plus invalid inputs), `requirements-evaluation.txt` (transitive pins), `v4_solution.py` and `v5_solution.py` (explicit warned archival opt-in), `EVALUATION.md`, `CASE_STUDY.md` and `README.md` (verified environment/eight-test status and permission evidence). This report is the ninth follow-up file. Synthetic evidence and historical notebook outputs did not change in the follow-up.
 
 The complete reviewable client-facing case-study prose is in [CASE_STUDY.md](CASE_STUDY.md); it makes no real-data performance or paid-pilot claim.
+
+
+## Authenticated remote follow-up
+
+Existing Kaggle CLI 2.2.2 authentication successfully read official competition page text and file metadata. No dataset download command, row samples, notebook-output retrieval or credential inspection occurred. The official no-LLM-copying rule creates an unresolved scope question for this AI-assisted private post-course audit. No notebook upload, remote run or submission was attempted; see `remote/README.md` for exact source links and capability details.
+
+Added `evaluate.py --aggregate-only` plus a regression test asserting that only metrics.json is emitted. All nine tests passed in the isolated environment (1.294 seconds), the aggregate-only synthetic CLI run reproduced the same 0.2592397275324104 macro-F1, and compilation/whitespace checks passed. The original full-local synthetic evidence is preserved. Remote artifact generation reads only public-project evaluator code and pins private visibility, CPU-only execution and no internet. Real Kaggle execution remains unverified.
+
+This follow-up changes six existing files: evaluator, tests, README, evaluation protocol, case study and problem statement (unverified semantic class names removed). It adds four remote-preparation files (`remote/README.md`, `build_notebook.py`, `private-baseline.py`, `kernel-metadata.json`) and updates this verification report. No original historical notebook or synthetic evidence files were changed.

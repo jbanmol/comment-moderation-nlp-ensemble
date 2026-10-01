@@ -74,7 +74,7 @@ def make_model(c):
     ])
 
 
-def evaluate(df, output, data_sha256, provenance):
+def evaluate(df, output, data_sha256, provenance, aggregate_only=False):
     validate_data(df)
     output = Path(output)
     if output.exists():
@@ -120,7 +120,12 @@ def evaluate(df, output, data_sha256, provenance):
         'versions': {'python': platform.python_version(), 'sklearn': sklearn.__version__,
                      'pandas': pd.__version__, 'numpy': np.__version__, 'joblib': joblib.__version__},
     }
+    if aggregate_only:
+        result['artifact_policy'] = 'aggregate-only'
     output.mkdir(parents=True)
+    if aggregate_only:
+        (output / 'metrics.json').write_text(json.dumps(result, indent=2) + '\n')
+        return result
     assignment = np.full(len(df), '', dtype=object)
     for name, idx in [('train', train), ('validation', validation), ('test', test)]:
         assignment[idx] = name
@@ -135,8 +140,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--data', type=Path, required=True, help='Authorized labeled train.csv, NOT competition test.csv')
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--aggregate-only', action='store_true', help='Write metrics only; no row-level artifacts or model')
     parser.add_argument('--provenance', required=True, help='Source and permission basis; use synthetic for fixtures')
     args = parser.parse_args()
     raw = args.data.read_bytes()
-    result = evaluate(pd.read_csv(args.data), args.output, hashlib.sha256(raw).hexdigest(), args.provenance)
+    result = evaluate(pd.read_csv(args.data), args.output, hashlib.sha256(raw).hexdigest(), args.provenance, aggregate_only=args.aggregate_only)
     print(json.dumps({'test_macro_f1': result['test_macro_f1'], 'selected_C': result['selected_C'], 'rows': result['rows']}, indent=2))

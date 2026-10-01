@@ -92,6 +92,12 @@ class EvaluationTests(unittest.TestCase):
             model = joblib.load(Path(tmp) / 'run' / 'model.joblib')
             self.assertNotIn('secrettestpartitiontoken', model.named_steps['tfidf'].vocabulary_)
 
+    def test_aggregate_only_writes_no_row_artifacts_or_model(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            result = evaluate(fixture(), Path(tmp) / 'run', 'fixture', 'synthetic', aggregate_only=True)
+            self.assertEqual(result['artifact_policy'], 'aggregate-only')
+            self.assertEqual([p.name for p in (Path(tmp) / 'run').iterdir()], ['metrics.json'])
+
     def test_invalid_data_fails(self):
         with self.assertRaises(ValueError):
             validate_data(pd.DataFrame({'comment': ['x']}))
