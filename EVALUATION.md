@@ -1,6 +1,6 @@
 # Reproducible evaluation
 
-`evaluate.py` is the supported clean baseline. V4/V5 scripts and notebooks are historical artifacts with known leakage; their recorded numbers are not comparable to this baseline. Historical scripts require an explicit opt-in to reproduce their known-leaky runs. Their source and notebook outputs remain available for inspection.
+`evaluate.py` is the supported clean baseline. V4/V5 scripts and notebooks are historical artifacts with known leakage; their recorded numbers are not comparable to this baseline. Historical scripts require an explicit opt-in to reproduce their known-leaky runs. Historical source remains available for inspection; original execution outputs remain in Git history, while current notebooks are source-only.
 
 ## Verified failure
 
@@ -49,7 +49,7 @@ No claim about performance on real comments, production readiness, fairness, ann
 
 ## Historical reproduction
 
-A hard block was unnecessarily disruptive for inspecting previous experiments. The original scripts and all notebook outputs are preserved. Their default execution directs users to the supported evaluator; an explicit opt-in emits a runtime warning before running the historical code:
+A hard block was unnecessarily disruptive for inspecting previous experiments. The original scripts and notebook source are preserved; execution outputs remain in Git history and are stripped from current notebooks. Their default execution directs users to the supported evaluator; an explicit opt-in emits a runtime warning before running the historical code:
 
 ```sh
 ALLOW_LEAKY_HISTORICAL_RUN=1 python3 v4_solution.py

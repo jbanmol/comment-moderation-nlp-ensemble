@@ -1,8 +1,8 @@
-# Verified Civil Comments baseline — private remote run
+# Verified Civil Comments baseline — remote run
 
 This is a **separate binary benchmark**, not a corrected score for the original four-class competition. The original project's outcome remains a verified leakage audit and synthetic pipeline reproduction.
 
-Private [Kaggle notebook](https://www.kaggle.com/code/jbanmol9/civil-comments-private-baseline), **version 1**, completed successfully on 2026-10-01. The protocol was committed as `005bf4d` before execution. Source SHA-256 `20fd4edfc008ded7d80fe624151c925627bf5ab12cb8a1d5f7281d084b49f213` matches the local evaluator. Data and caches remained within Kaggle; only aggregate metrics, stage timestamps and notebook configuration metadata were retrieved. No dataset, row-level predictions, samples, fitted models or HTML output files were downloaded to the Mac. No competition submission, paid compute or public notebook was created.
+[Kaggle notebook](https://www.kaggle.com/code/jbanmol9/civil-comments-private-baseline), **version 1**, submitted with private CPU settings, completed successfully on 2026-10-01. The protocol was committed as `005bf4d` before execution. Source SHA-256 `20fd4edfc008ded7d80fe624151c925627bf5ab12cb8a1d5f7281d084b49f213` matches the local evaluator. Data and caches remained within Kaggle; only aggregate metrics, stage timestamps and notebook configuration metadata were retrieved. No dataset, row-level predictions, samples, fitted models or HTML output files were downloaded to the Mac. No competition submission or paid compute was used, and no public visibility setting was requested. Final notebook visibility remains independently unverified.
 
 ## Task and results
 

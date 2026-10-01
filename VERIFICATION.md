@@ -1,3 +1,5 @@
+> Current publication status: the original competition's current notebooks are source-only; its original outputs remain in Git history. The separate Civil Comments job was submitted with private CPU settings, but final visibility remains independently unverified. The dated sections below record earlier stages; see PUBLICATION_REVIEW.md for the final review.
+
 # Independent verification — 2026-10-01
 
 Baseline change: local commit `075ad95`, branch `fix/leakage-safe-evaluation`. Verification used a fresh Python 3.12.11 venv at `/tmp/moderation-verification-075ad95`; it did not inherit system packages. No remote publication, real-data run, restricted-data download, agreement acceptance or employer data use occurred.
@@ -74,3 +76,12 @@ Fourteen local synthetic/regression tests passed; compilation and whitespace che
 Added files: `civil_comments/benchmark.py`, `kernel-metadata.json`, `PROTOCOL.md`, `RESULTS.md`; `tests/test_civil_comments.py`; three aggregate evidence files (`metrics.json`, `run.json`, `uploaded_metadata.json`). README, case study and this verification report link the separate verified evidence. Historical notebooks, original synthetic evidence and the frozen remote evaluator are preserved.
 
 The optional independent GetKernel metadata lookup returned HTTP403. It was not retried or bypassed. Execution COMPLETE, aggregate-log retrieval and source checksum were verified; privacy/CPU configuration is recorded from the uploaded request. The container image identifier is unavailable. `civil_comments/requirements-observed.txt` lists successful-run core versions, without claiming a complete runtime lock.
+
+
+## Final local publication review
+
+No browser use, remote data retrieval, Kaggle execution or test tuning occurred during this review. All 14 tests passed again (0.938 seconds); compileall and diff whitespace checks passed. Source checksum still matches protocol commit 005bf4d and the remote log. Macro-F1, class supports, selected C/threshold and stage order were independently checked against aggregate evidence.
+
+Historical scan: V4 had 34 execution outputs, 15 execution counts and widget metadata; no saved dataframe tables were detected. All those runtime outputs/counts/widgets were removed conservatively. V5 and the original t12026 notebook already contained no execution outputs. Source-cell comparisons passed; Git history was preserved. Unused original-competition remote executable preparation was removed from the proposed publication, retaining its explanatory README and recoverable history. All retained synthetic input rows were verified equal to the seed 7 generator and their input checksum matched the synthetic metrics; a prominent synthetic-only README was added.
+
+Case-study/result claims now say the notebook was submitted with private settings and final visibility is independently unverified. Original class semantics are described as not established from the inspected official data description. Exact branch/PR scope, checks and limitations are in PUBLICATION_REVIEW.md. No push, PR, merge or public notebook publication was performed.

@@ -40,7 +40,7 @@ Your goal is to use this information to predict how each entry was ultimately ca
 | `disability` | Whether the system detected references to an ability-related topic |
 | `label` | **Target Variable** — The final category assigned to the comment (4 distinct values) |
 
-The official Kaggle data description defines four internal handling categories without assigning semantic names to label IDs. Previous semantic interpretations are unverified and have been removed. See [authenticated source findings](remote/README.md).
+The official Kaggle data description we inspected describes four internal handling categories; it did not establish a semantic mapping for label IDs. Previous semantic interpretations are unverified and have been removed. See [authenticated source findings](remote/README.md).
 
 ## Historical EDA notes (not independently reproduced)
 
