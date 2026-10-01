@@ -34,3 +34,7 @@ kaggle kernels push -p civil_comments -t 7200
 kaggle kernels status jbanmol9/civil-comments-private-baseline
 kaggle kernels logs jbanmol9/civil-comments-private-baseline
 ```
+
+## Post-run reproducibility note
+
+Version1 completed successfully. See RESULTS.md for verified metrics and limits. `requirements-observed.txt` records the core packages in that run; it is not a full container lock. Independent GetKernel metadata retrieval returned HTTP403, leaving the container image identifier and server-side privacy flags unverified beyond the uploaded private CPU request. Status/log retrieval succeeded. No retry or permission bypass was attempted. Do not silently claim a future Kaggle base image reproduces these numbers; compare its versions/checksums and follow the unchanged predeclared protocol.

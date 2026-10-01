@@ -1,0 +1,290 @@
+{
+  "always_non_toxic_baseline": {
+    "average_precision": 0.07915,
+    "classification_report": {
+      "0": {
+        "f1-score": 0.9587942837806179,
+        "precision": 0.92085,
+        "recall": 1.0,
+        "support": 18417.0
+      },
+      "1": {
+        "f1-score": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "support": 1583.0
+      },
+      "accuracy": 0.92085,
+      "macro avg": {
+        "f1-score": 0.47939714189030896,
+        "precision": 0.460425,
+        "recall": 0.5,
+        "support": 20000.0
+      },
+      "weighted avg": {
+        "f1-score": 0.882905716219382,
+        "precision": 0.8479647224999999,
+        "recall": 0.92085,
+        "support": 20000.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        18417,
+        0
+      ],
+      [
+        1583,
+        0
+      ]
+    ],
+    "macro_f1": 0.47939714189030896,
+    "roc_auc": 0.5
+  },
+  "candidates": [
+    {
+      "C": 0.1,
+      "threshold": 0.2,
+      "validation_macro_f1": 0.11947517395554078
+    },
+    {
+      "C": 0.1,
+      "threshold": 0.3,
+      "validation_macro_f1": 0.3410264316313611
+    },
+    {
+      "C": 0.1,
+      "threshold": 0.4,
+      "validation_macro_f1": 0.5598665082866678
+    },
+    {
+      "C": 0.1,
+      "threshold": 0.5,
+      "validation_macro_f1": 0.6933906444732049
+    },
+    {
+      "C": 0.1,
+      "threshold": 0.6,
+      "validation_macro_f1": 0.7284954224264828
+    },
+    {
+      "C": 0.1,
+      "threshold": 0.7,
+      "validation_macro_f1": 0.6845574048949148
+    },
+    {
+      "C": 0.1,
+      "threshold": 0.8,
+      "validation_macro_f1": 0.5933448509811627
+    },
+    {
+      "C": 1.0,
+      "threshold": 0.2,
+      "validation_macro_f1": 0.5272958520879786
+    },
+    {
+      "C": 1.0,
+      "threshold": 0.3,
+      "validation_macro_f1": 0.6365538561510369
+    },
+    {
+      "C": 1.0,
+      "threshold": 0.4,
+      "validation_macro_f1": 0.7075661414467787
+    },
+    {
+      "C": 1.0,
+      "threshold": 0.5,
+      "validation_macro_f1": 0.747583363947748
+    },
+    {
+      "C": 1.0,
+      "threshold": 0.6,
+      "validation_macro_f1": 0.7656872450820295
+    },
+    {
+      "C": 1.0,
+      "threshold": 0.7,
+      "validation_macro_f1": 0.7637999219109398
+    },
+    {
+      "C": 1.0,
+      "threshold": 0.8,
+      "validation_macro_f1": 0.7351667469477327
+    }
+  ],
+  "dataset": "google/civil_comments",
+  "elapsed_seconds": 114.269435362,
+  "excluded_features": [
+    "parent_text",
+    "all other annotations and metadata"
+  ],
+  "features": [
+    "text"
+  ],
+  "files": [
+    {
+      "available_columns": [
+        "text",
+        "toxicity",
+        "severe_toxicity",
+        "obscene",
+        "threat",
+        "insult",
+        "identity_attack",
+        "sexual_explicit"
+      ],
+      "file": "data/train-00000-of-00002.parquet",
+      "sha256": "c20f01c3aecbdd942886cacb0ee67e995df33bc712a622fde75927ed3d6ccefe",
+      "source_rows": 902437
+    },
+    {
+      "available_columns": [
+        "text",
+        "toxicity",
+        "severe_toxicity",
+        "obscene",
+        "threat",
+        "insult",
+        "identity_attack",
+        "sexual_explicit"
+      ],
+      "file": "data/train-00001-of-00002.parquet",
+      "sha256": "a76af69d7b24758bc38b196bc422d4767935c1dd7d3c1465554649c546d99ccb",
+      "source_rows": 902437
+    },
+    {
+      "available_columns": [
+        "text",
+        "toxicity",
+        "severe_toxicity",
+        "obscene",
+        "threat",
+        "insult",
+        "identity_attack",
+        "sexual_explicit"
+      ],
+      "file": "data/validation-00000-of-00001.parquet",
+      "sha256": "2e0eb65474e7e1290df8689fc93eea783160c898c09ae15382c0a9662367bd03",
+      "source_rows": 97320
+    },
+    {
+      "available_columns": [
+        "text",
+        "toxicity",
+        "severe_toxicity",
+        "obscene",
+        "threat",
+        "insult",
+        "identity_attack",
+        "sexual_explicit"
+      ],
+      "file": "data/test-00000-of-00001.parquet",
+      "sha256": "410f803ff161e7c4ba005db7de5b444cac413f4861bf056b0fd69d670d75aa08",
+      "source_rows": 97320
+    }
+  ],
+  "group_audit": "This HF export has no author/article/parent identifiers; group independence cannot be verified",
+  "license": "CC0-1.0",
+  "limitations": [
+    "Resource-limited text-hash sample, not full benchmark",
+    "No article/author/temporal separation established",
+    "Near duplicates and contextual relationships can remain",
+    "Thresholded annotator agreement is not objective ground truth",
+    "No subgroup fairness, calibration or production-readiness claim"
+  ],
+  "partitions": {
+    "test": {
+      "cross_split_overlap": 1666,
+      "empty": 0,
+      "positive_rows": 1583,
+      "retained_key_sha256": "696c3e043fefe48403c1db6598b042b18d94319c4ab3d73eb93b0ef0b270b424",
+      "retained_rows": 20000,
+      "source_rows": 97320,
+      "within_split_duplicates": 573
+    },
+    "train": {
+      "cross_split_overlap": 0,
+      "empty": 0,
+      "positive_rows": 8050,
+      "retained_key_sha256": "f12123d00b71853bd6ef22e32b632719da66b0bb553e43f5b003186b36d1f57a",
+      "retained_rows": 100000,
+      "source_rows": 1804874,
+      "within_split_duplicates": 28366
+    },
+    "validation": {
+      "cross_split_overlap": 1320,
+      "empty": 0,
+      "positive_rows": 1589,
+      "retained_key_sha256": "c3aa1b707710effa5d119e902092c1c69eff8f3b78a2ea21fa17c9f284aaca0a",
+      "retained_rows": 20000,
+      "source_rows": 97320,
+      "within_split_duplicates": 565
+    }
+  },
+  "protocol": "Official splits; NFKC/case/whitespace duplicate removal, earlier split wins; lowest normalized text SHA256 keys per cap; training-only fits; validation-only C/threshold selection; no refit or test tuning",
+  "python": "3.12.13",
+  "revision": "f2970eb3a55777454c94069077cc8d9b5866312d",
+  "sampling_caps": {
+    "test": 20000,
+    "train": 100000,
+    "validation": 20000
+  },
+  "seed": 42,
+  "selection": {
+    "C": 1.0,
+    "threshold": 0.6,
+    "validation_macro_f1": 0.7656872450820295
+  },
+  "source_sha256": "20fd4edfc008ded7d80fe624151c925627bf5ab12cb8a1d5f7281d084b49f213",
+  "task": "Binary toxicity: annotator fraction >= 0.5 => 1; below => 0",
+  "test": {
+    "average_precision": 0.5935265549719086,
+    "classification_report": {
+      "0": {
+        "f1-score": 0.9613771313395435,
+        "precision": 0.964529704323113,
+        "recall": 0.9582450996362056,
+        "support": 18417.0
+      },
+      "1": {
+        "f1-score": 0.5684723067559343,
+        "precision": 0.5484439224897241,
+        "recall": 0.5900189513581807,
+        "support": 1583.0
+      },
+      "accuracy": 0.9291,
+      "macro avg": {
+        "f1-score": 0.7649247190477388,
+        "precision": 0.7564868134064185,
+        "recall": 0.7741320254971932,
+        "support": 20000.0
+      },
+      "weighted avg": {
+        "f1-score": 0.9302787144737508,
+        "precision": 0.9315965146910002,
+        "recall": 0.9291,
+        "support": 20000.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        17648,
+        769
+      ],
+      [
+        649,
+        934
+      ]
+    ],
+    "macro_f1": 0.7649247190477388,
+    "roc_auc": 0.9047363166038574
+  },
+  "versions": {
+    "huggingface-hub": "1.11.0",
+    "numpy": "2.0.2",
+    "pyarrow": "24.0.0",
+    "scikit-learn": "1.6.1",
+    "scipy": "1.16.3"
+  }
+}

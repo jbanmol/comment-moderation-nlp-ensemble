@@ -63,3 +63,14 @@ Existing Kaggle CLI 2.2.2 authentication successfully read official competition 
 Added `evaluate.py --aggregate-only` plus a regression test asserting that only metrics.json is emitted. All nine tests passed in the isolated environment (1.294 seconds), the aggregate-only synthetic CLI run reproduced the same 0.2592397275324104 macro-F1, and compilation/whitespace checks passed. The original full-local synthetic evidence is preserved. Remote artifact generation reads only public-project evaluator code and pins private visibility, CPU-only execution and no internet. Real Kaggle execution remains unverified.
 
 This follow-up changes six existing files: evaluator, tests, README, evaluation protocol, case study and problem statement (unverified semantic class names removed). It adds four remote-preparation files (`remote/README.md`, `build_notebook.py`, `private-baseline.py`, `kernel-metadata.json`) and updates this verification report. No original historical notebook or synthetic evidence files were changed.
+
+
+## Separate CC0 remote benchmark completed
+
+The user approved switching to openly licensed Civil Comments with all data processing remote. Protocol commit `005bf4d` preceded the run. Private Kaggle notebook `jbanmol9/civil-comments-private-baseline`, version1, reached COMPLETE on its first attempt. The code checksum matched the uploaded source; only aggregate metrics, stage logs and the uploaded privacy configuration were saved locally. No competition source was attached, submission made, dataset/rows downloaded, credentials read or created, or paid service used.
+
+Fourteen local synthetic/regression tests passed; compilation and whitespace checks passed. Binary test macro-F1=0.7649247190477388, average precision=0.5935265549719086, ROC AUC=0.9047363166038574 on 20,000 held-out rows. Full environment, source-file/sample checksums, duplicate counts, error counts, and limits are recorded in `civil_comments/RESULTS.md` and `evidence/civil_comments/`. These scores are separate from the original project's four-class leakage audit. No original corrected real-data score is claimed.
+
+Added files: `civil_comments/benchmark.py`, `kernel-metadata.json`, `PROTOCOL.md`, `RESULTS.md`; `tests/test_civil_comments.py`; three aggregate evidence files (`metrics.json`, `run.json`, `uploaded_metadata.json`). README, case study and this verification report link the separate verified evidence. Historical notebooks, original synthetic evidence and the frozen remote evaluator are preserved.
+
+The optional independent GetKernel metadata lookup returned HTTP403. It was not retried or bypassed. Execution COMPLETE, aggregate-log retrieval and source checksum were verified; privacy/CPU configuration is recorded from the uploaded request. The container image identifier is unavailable. `civil_comments/requirements-observed.txt` lists successful-run core versions, without claiming a complete runtime lock.

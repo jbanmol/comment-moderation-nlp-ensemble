@@ -2,6 +2,8 @@
 
 Four-class NLP classification with imbalanced labels, structured metadata, TF-IDF/SVD, sentence embeddings, gradient boosting, and a linear text model.
 
+**Separate verified public-data baseline:** a private remote Civil Comments run achieved binary test macro-F1 **0.76492** on 20,000 held-out rows (always-non-toxic baseline: **0.47940**). This is a resource-limited, deduplicated sample with explicit limitations, not the original four-class score. See [results and reproduction evidence](civil_comments/RESULTS.md).
+
 [Recorded V4 notebook](23f1001015-notebook-v4.ipynb) · [V4 script](v4_solution.py) · [V5 experiment](v5_solution.py) · [Problem statement](PROBLEM_STATEMENT.md)
 
 ## Supported evaluation and case study
